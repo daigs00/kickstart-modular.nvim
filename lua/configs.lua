@@ -100,7 +100,7 @@ lspconfig.pylsp.setup {
         -- linter options
         pylint = { enabled = false, executable = 'pylint' },
         pyflakes = { enabled = false },
-        pycodestyle = { enabled = true, ignore = { 'E501' } },
+        pycodestyle = { enabled = false, ignore = { 'E501' } },
         mccabe = { enabled = false },
         -- type checker
         pylsp_mypy = { enabled = false },

@@ -1,13 +1,13 @@
 return {
-  { 'ellisonleao/gruvbox.nvim' },
-  { 'rebelot/kanagawa.nvim' },
-  { 'catppuccin/nvim', name = 'catppuccin', lazy = false },
+  { 'ellisonleao/gruvbox.nvim', lazy = true },
+  { 'rebelot/kanagawa.nvim', lazy = true },
+  { 'catppuccin/nvim', name = 'catppuccin', lazy = true },
   { 'rose-pine/neovim', name = 'rose-pine' },
-  { 'sainnhe/everforest' },
-  { 'bluz71/vim-nightfly-colors' },
-  { 'NLKNguyen/papercolor-theme' },
-  { 'romainl/Apprentice' },
-  { 'diegoulloao/neofusion.nvim', priority = 1000, config = true, opts = ... },
+  { 'sainnhe/everforest', lazy = true },
+  { 'bluz71/vim-nightfly-colors', lazy = true },
+  { 'NLKNguyen/papercolor-theme', lazy = true },
+  { 'romainl/Apprentice', lazy = true },
+  { 'diegoulloao/neofusion.nvim', lazy = true, priority = 1000, config = true, opts = ... },
   { 'folke/tokyonight.nvim', lazy = false, priority = 1000, config = true, opts = ... },
 
   -- Configure LazyVim to load colorscheme
