@@ -1,5 +1,26 @@
 -- Lualine Configuration
 -- This configuration is mainly implemented from their github repository.
+local virtual_env = function()
+  -- only show virtual env for Python
+  if vim.bo.filetype ~= 'python' then
+    return ''
+  end
+
+  local conda_env = os.getenv 'CONDA_DEFAULT_ENV'
+  local venv_path = os.getenv 'VIRTUAL_ENV'
+
+  if venv_path == nil then
+    if conda_env == nil then
+      return ''
+    else
+      return string.format('  %s (conda)', conda_env)
+    end
+  else
+    local venv_name = vim.fn.fnamemodify(venv_path, ':t')
+
+    return string.format('  %s', venv_name)
+  end
+end
 
 require('lualine').setup {
   options = {
@@ -25,7 +46,7 @@ require('lualine').setup {
     lualine_b = { 'branch', 'diff', 'diagnostics' },
     lualine_c = { 'filename' },
     lualine_x = { 'encoding', 'fileformat', 'filetype' },
-    lualine_y = { 'progress' },
+    lualine_y = { virtual_env },
     lualine_z = { 'location' },
   },
   inactive_sections = {
@@ -40,26 +61,6 @@ require('lualine').setup {
   winbar = {},
   inactive_winbar = {},
   extensions = {},
-  virtual_env = function()
-    -- only show virtual env for Python
-    if vim.bo.filetype ~= 'python' then
-      return ''
-    end
-
-    local conda_env = os.getenv 'CONDA_DEFAULT_ENV'
-    local venv_path = os.getenv 'VIRTUAL_ENV'
-
-    if venv_path == nil then
-      if conda_env == nil then
-        return ''
-      else
-        return string.format('  %s (conda)', conda_env)
-      end
-    else
-      local venv_name = vim.fn.fnamemodify(venv_path, ':t')
-      return string.format('  %s (venv)', venv_name)
-    end
-  end,
 }
 
 require('noice').setup {
@@ -88,7 +89,7 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         -- formatter options
-        black = { enabled = true },
+        black = { enabled = false },
         autopep8 = { enabled = false },
         yapf = { enabled = false },
         -- linter options
@@ -96,11 +97,11 @@ lspconfig.pylsp.setup {
         pyflakes = { enabled = false },
         pycodestyle = { enabled = true, ignore = { 'E501' } },
         -- type checker
-        pylsp_mypy = { enabled = true },
+        pylsp_mypy = { enabled = false },
         -- auto-completion options
         jedi_completion = { fuzzy = true },
         -- import sorting
-        pyls_isort = { enabled = true },
+        pyls_isort = { enabled = false },
       },
     },
   },
