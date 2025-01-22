@@ -63,6 +63,11 @@ require('lualine').setup {
   extensions = {},
 }
 
+require('yapf').setup {
+  command = 'yapf',
+  style = '/home/mdaigle/.style.yapf',
+}
+
 require('noice').setup {
   lsp = {
     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -89,13 +94,14 @@ lspconfig.pylsp.setup {
     pylsp = {
       plugins = {
         -- formatter options
-        black = { enabled = false },
+        black = { enabled = false, executable = 'black' },
         autopep8 = { enabled = false },
-        yapf = { enabled = false },
+        yapf = { enabled = true },
         -- linter options
         pylint = { enabled = false, executable = 'pylint' },
         pyflakes = { enabled = false },
         pycodestyle = { enabled = true, ignore = { 'E501' } },
+        mccabe = { enabled = false },
         -- type checker
         pylsp_mypy = { enabled = false },
         -- auto-completion options
